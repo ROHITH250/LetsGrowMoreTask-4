@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Scientific Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: purple;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      background-color: #333;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .calculator {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .calculator button {
+      padding: 10px;
+      font-size: 16px;
+      text-align: center;
+      background-color: #f2f2f2;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .calculator button.operator {
+      background-color: #4CAF50;
+      color: #fff;
+    }
+
+    .result {
+      text-align: right;
+      margin-bottom: 10px;
+    }
+
+    .top-row {
+      grid-column: 1 / span 4;
+    }
+
+    .extra-operator {
+      background-color: #333;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Scientific Calculator</h1>
+    <div class="result" id="result"></div>
+    <div class="calculator">
+      <button onclick="appendToExpression('7')">7</button>
+      <button onclick="appendToExpression('8')">8</button>
+      <button onclick="appendToExpression('9')">9</button>
+      <button onclick="appendToExpression('/')">/</button>
+      <button onclick="appendToExpression('4')">4</button>
+      <button onclick="appendToExpression('5')">5</button>
+      <button onclick="appendToExpression('6')">6</button>
+      <button onclick="appendToExpression('*')">*</button>
+      <button onclick="appendToExpression('1')">1</button>
+      <button onclick="appendToExpression('2')">2</button>
+      <button onclick="appendToExpression('3')">3</button>
+      <button onclick="appendToExpression('-')">-</button>
+      <button onclick="appendToExpression('0')">0</button>
+      <button onclick="appendToExpression('.')">.</button>
+      <button onclick="calculateResult()">=</button>
+      <button onclick="appendToExpression('+')">+</button>
+      <button class="top-row" onclick="appendToExpression('Math.sqrt(')">√</button>
+      <button class="extra-operator" onclick="appendToExpression('Math.pow(')">x<sup>y</sup></button>
+      <button class="extra-operator" onclick="appendToExpression('Math.sin(')">sin</button>
+      <button class="extra-operator" onclick="appendToExpression('Math.cos(')">cos</button>
+      <button class="extra-operator" onclick="appendToExpression('Math.tan(')">tan</button>
+      <button onclick="clearExpression()">C</button>
+    </div>
+  </div>
+
+  <script>
+    var expression = '';
+    var resultElement = document.getElementById('result');
+
+    function appendToExpression(value) {
+      expression += value;
+      resultElement.innerText = expression;
+    }
+
+    function calculateResult() {
+      try {
+        var result = eval(expression);
+        resultElement.innerText = result;
+        expression = result.toString();
+      } catch (error) {
+        resultElement.innerText = 'Error';
+      }
+    }
+
+    function clearExpression() {
+      expression = '';
+      resultElement.innerText = '';
+    }
+  </script>
+</body>
+</html>
